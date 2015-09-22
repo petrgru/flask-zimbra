@@ -6,8 +6,6 @@ from pythonzimbra.response_xml import ResponseXml
 from pythonzimbra.communication import Communication
 from pythonzimbra.response_json import ResponseJson
 from pythonzimbra.request_json import RequestJson
-#import argparse
-#import ConfigParser
 import time
 from ..settings import app_config
 

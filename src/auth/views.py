@@ -11,10 +11,8 @@ from ..emails import send_activation, send_password_reset
 from ..extensions import login_manager
 from ..data.zimbraadmin import zm
 
+
 blueprint = Blueprint('auth', __name__)
-
-#zm=ZimbraManager(url="https://mail.iservery.cz:7071/service/admin/soap",admin="admin@iservery.cz",password="sdfsdfsd")
-
 
 
 @blueprint.route('/activate', methods=['GET'])
@@ -72,7 +70,6 @@ def login():
                 db.session.add(user)
                 db.session.commit()
                 user=User.find_by_email(form.email.data)
-            zm.getToken()
             login_user(user, form.remember_me.data)
             flash("Logged in successfully", "info")
             return redirect(request.args.get('next') or url_for('public.index'))
@@ -138,13 +135,5 @@ def adduserzimbra():
 @login_required
 @blueprint.route('/zimbralistusers', methods=['GET', 'POST'])
 def listuserzimbra():
-
     r = zm.getAllAccount()
     return render_template("auth/zimbralistaccounts.tmpl", data=r)
-#    return render_template("auth/zimbralistusers.tmpl", form=form)
-@login_required
-@blueprint.route('/loginpostmaster', methods=['GET', 'POST'])
-def loginpostmaster():
-    r = zm.getTokenUser(user='postmaster@test.cz',password='test123')
-    flash(r,'info')
-    return redirect(url_for('public.index'))

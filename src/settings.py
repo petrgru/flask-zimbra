@@ -71,7 +71,9 @@ class TestConfig(Config):
 
     # Allows form testing
     WTF_CSRF_ENABLED = False
-
+    ZIMBRA_URL=os.environ.get('ZIMBRA_URL')
+    ZIMBRA_ADMIN=os.environ.get('ZIMBRA_ADMIN')
+    ZIMBRA_ADMIN_PASSWORD=os.environ.get('ZIMBRA_ADMIN_PASSWORD')
 class ProductionConfig(Config):
     ENV = 'prod'
 
@@ -84,7 +86,9 @@ class ProductionConfig(Config):
     # Increase rounds for production instances
     # timeit Bcrypt().generate_password_hash('some12uihr3', 7) ~ 11.4ms per loop
     BCRYPT_LOG_ROUNDS = 7
-
+    ZIMBRA_URL=os.environ.get('ZIMBRA_URL')
+    ZIMBRA_ADMIN=os.environ.get('ZIMBRA_ADMIN')
+    ZIMBRA_ADMIN_PASSWORD=os.environ.get('ZIMBRA_ADMIN_PASSWORD')
 config_dict = {
     'dev': DevelopmentConfig,
     'prod': ProductionConfig,
